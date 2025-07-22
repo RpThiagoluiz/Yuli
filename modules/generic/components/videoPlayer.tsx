@@ -1,7 +1,6 @@
 import { colors } from '@/styles/colors';
-import * as ScreenOrientation from 'expo-screen-orientation';
 import { VideoView, useVideoPlayer } from 'expo-video';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import {
   ActivityIndicator,
   StyleSheet,
@@ -12,23 +11,9 @@ import {
 
 export default function VideoPlayer({ uri }: { uri: string }) {
   const [isLoading, setIsLoading] = useState(true);
-  const [currentUrlIndex, setCurrentUrlIndex] = useState(0);
   const [hasError, setHasError] = useState(false);
 
-  useEffect(() => {
-    const setupOrientation = async () => {
-      try {
-        await ScreenOrientation.unlockAsync();
-        console.log('🔄 Orientações desbloqueadas - usuário pode escolher');
-      } catch (error) {
-        console.log('❌ Erro ao desbloquear orientações:', error);
-      }
-    };
-
-    setupOrientation();
-  }, []);
-
-  const getFileIdFromUrl = (url: string): string | null => {
+  const getFileIdFromUrl = useCallback((url: string): string | null => {
     const patterns = [
       /\/file\/d\/([a-zA-Z0-9_-]+)/,
       /id=([a-zA-Z0-9_-]+)/,
@@ -40,60 +25,19 @@ export default function VideoPlayer({ uri }: { uri: string }) {
       if (match) return match[1];
     }
     return null;
-  };
+  }, []);
 
   const fileId = getFileIdFromUrl(uri);
-
-  const getOptimalUrl = () => {
-    if (fileId) {
-      const urlOptions = [
-        `https://drive.google.com/file/d/${fileId}/preview`,
-        `https://drive.google.com/uc?export=download&id=${fileId}`,
-        `https://drive.google.com/uc?export=view&id=${fileId}`,
-        `https://docs.google.com/uc?export=download&id=${fileId}`,
-        uri,
-      ];
-
-      return urlOptions[currentUrlIndex] || urlOptions[0];
-    }
-    return uri;
-  };
-
-  const videoUrl = getOptimalUrl();
+  const videoUrl = `https://drive.google.com/uc?export=view&id=${fileId}`;
 
   const player = useVideoPlayer(videoUrl, (player) => {
     player.loop = false;
     player.muted = false;
     player.allowsExternalPlayback = true;
     player.showNowPlayingNotification = true;
-  });
 
-  useEffect(() => {
-    setCurrentUrlIndex(0);
-    setIsLoading(true);
-    setHasError(false);
-  }, [uri]);
-
-  useEffect(() => {
-    if (isLoading && fileId && !hasError) {
-      const timeout = setTimeout(() => {
-        if (currentUrlIndex < 4) {
-          setCurrentUrlIndex((prev) => prev + 1);
-        } else {
-          setHasError(true);
-          setIsLoading(false);
-        }
-      }, 8000);
-
-      return () => clearTimeout(timeout);
-    }
-  }, [isLoading, currentUrlIndex, fileId, hasError]);
-
-  useEffect(() => {
-    const statusSubscription = player.addListener('statusChange', (status) => {
+    player.addListener('statusChange', (status) => {
       switch (status.status) {
-        case 'idle':
-          break;
         case 'loading':
           setIsLoading(true);
           setHasError(false);
@@ -103,31 +47,21 @@ export default function VideoPlayer({ uri }: { uri: string }) {
           setHasError(false);
           break;
         case 'error':
-          if (fileId && currentUrlIndex < 4) {
-            setCurrentUrlIndex((prev) => prev + 1);
-            setIsLoading(true);
-          } else {
-            setHasError(true);
-            setIsLoading(false);
-          }
+          setIsLoading(false);
+          setHasError(true);
           break;
       }
     });
+  });
 
-    return () => {
-      statusSubscription?.remove();
-    };
-  }, [player, fileId, currentUrlIndex]);
+  const resetState = () => {
+    setIsLoading(true);
+    setHasError(false);
+    player.replace(videoUrl);
+  };
 
   return (
     <View style={styles.container}>
-      <View style={styles.debugContainer}>
-        <Text style={styles.debugText}>
-          ExpoVideo {isLoading ? 'Carregando...' : hasError ? 'Erro' : 'Pronto'}
-          {fileId && ` (${currentUrlIndex + 1}/5)`}
-        </Text>
-      </View>
-
       {isLoading && (
         <View style={styles.loadingContainer}>
           <ActivityIndicator size="large" color={colors.primary[900]} />
@@ -140,14 +74,7 @@ export default function VideoPlayer({ uri }: { uri: string }) {
           <Text style={styles.errorText}>
             ❌ Não foi possível carregar o vídeo
           </Text>
-          <TouchableOpacity
-            style={styles.retryButton}
-            onPress={() => {
-              setCurrentUrlIndex(0);
-              setHasError(false);
-              setIsLoading(true);
-            }}
-          >
+          <TouchableOpacity style={styles.retryButton} onPress={resetState}>
             <Text style={styles.retryButtonText}>🔄 Tentar novamente</Text>
           </TouchableOpacity>
         </View>
@@ -174,19 +101,6 @@ const styles = StyleSheet.create({
   video: {
     flex: 1,
     backgroundColor: '#000',
-  },
-  debugContainer: {
-    position: 'absolute',
-    top: 10,
-    left: 10,
-    zIndex: 1000,
-    backgroundColor: 'rgba(0,0,0,0.7)',
-    padding: 8,
-    borderRadius: 4,
-  },
-  debugText: {
-    color: 'white',
-    fontSize: 11,
   },
   loadingContainer: {
     position: 'absolute',

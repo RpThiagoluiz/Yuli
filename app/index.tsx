@@ -2,7 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
 import React, { useEffect, useRef, useState } from 'react';
-import { Animated, StyleSheet, Text, View } from 'react-native';
+import { Animated, StyleSheet, View } from 'react-native';
 import { colors } from '../styles/colors';
 
 const TIME_TO_NAVIGATE = 3000; // 3 seconds
@@ -59,9 +59,6 @@ export default function WelcomeScreen() {
               size={200}
               color={colors.primary.DEFAULT}
             />
-            <View style={styles.textContainer}>
-              <Text style={styles.welcomeTitle}>Yuli</Text>
-            </View>
           </Animated.View>
         </View>
       )}
