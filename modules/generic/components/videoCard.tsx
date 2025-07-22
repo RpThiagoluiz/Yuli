@@ -56,7 +56,7 @@ export default function VideoCard({ video }: VideoCardProps) {
         <Ionicons
           name={getVideoIcon(video.name)}
           size={32}
-          color={colors.miami.cyan}
+          color={colors.primary.DEFAULT}
         />
       </View>
 
@@ -70,7 +70,11 @@ export default function VideoCard({ video }: VideoCardProps) {
       </View>
 
       <View style={styles.arrowContainer}>
-        <Ionicons name="chevron-forward" size={20} color={colors.miami.pink} />
+        <Ionicons
+          name="chevron-forward"
+          size={20}
+          color={colors.secondary.DEFAULT}
+        />
       </View>
     </TouchableOpacity>
   );
@@ -80,12 +84,12 @@ const styles = StyleSheet.create({
   card: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: colors.neutral[900],
+    backgroundColor: colors.neutral[100],
     borderRadius: 16,
     padding: 16,
     marginHorizontal: 16,
     marginBottom: 12,
-    shadowColor: colors.miami.pink,
+    shadowColor: colors.secondary.DEFAULT,
     shadowOffset: {
       width: 0,
       height: 4,
@@ -94,18 +98,18 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
     elevation: 8,
     borderWidth: 2,
-    borderColor: colors.miami.cyan,
+    borderColor: colors.primary.DEFAULT,
   },
   iconContainer: {
     width: 60,
     height: 60,
     borderRadius: 30,
-    backgroundColor: colors.neutral[800],
+    backgroundColor: colors.neutral[0],
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 16,
     borderWidth: 1,
-    borderColor: colors.miami.cyan,
+    borderColor: colors.primary.DEFAULT,
   },
   contentContainer: {
     flex: 1,
@@ -113,13 +117,13 @@ const styles = StyleSheet.create({
   videoTitle: {
     fontSize: 16,
     fontWeight: '600',
-    color: colors.miami.white,
+    color: colors.neutral.DEFAULT,
     marginBottom: 4,
     lineHeight: 20,
   },
   videoType: {
     fontSize: 14,
-    color: colors.miami.gray,
+    color: colors.neutral.DEFAULT,
     fontWeight: '400',
   },
   arrowContainer: {

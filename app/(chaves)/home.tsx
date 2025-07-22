@@ -2,7 +2,6 @@ import { useDriveVideos } from '@/modules/driveChaves/hooks/useGetDriveChaves';
 import VideoCard from '@/modules/generic/components/videoCard';
 import { colors } from '@/styles/colors';
 import { LinearGradient } from 'expo-linear-gradient';
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import {
   ActivityIndicator,
@@ -56,13 +55,12 @@ export default function ChavesHome() {
   if (isLoading) {
     return (
       <LinearGradient
-        colors={[colors.neutral[900], colors.neutral[800]]}
+        colors={[colors.neutral[0], colors.neutral[100]]}
         style={styles.container}
       >
         <SafeAreaView style={styles.safeArea}>
-          <StatusBar style="light" />
           <View style={styles.centerContainer}>
-            <ActivityIndicator size="large" color={colors.miami.cyan} />
+            <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
             <Text style={styles.loadingText}>Carregando vídeos...</Text>
           </View>
         </SafeAreaView>
@@ -73,11 +71,10 @@ export default function ChavesHome() {
   if (isError) {
     return (
       <LinearGradient
-        colors={[colors.neutral[900], colors.neutral[800]]}
+        colors={[colors.neutral[0], colors.neutral[100]]}
         style={styles.container}
       >
         <SafeAreaView style={styles.safeArea}>
-          <StatusBar style="light" />
           <View style={styles.centerContainer}>
             <Text style={styles.errorText}>Erro ao carregar vídeos</Text>
             <Text style={styles.subtitle}>
@@ -92,11 +89,10 @@ export default function ChavesHome() {
   if (!videos || videos.length === 0) {
     return (
       <LinearGradient
-        colors={[colors.neutral[900], colors.neutral[800]]}
+        colors={[colors.neutral[0], colors.neutral[100]]}
         style={styles.container}
       >
         <SafeAreaView style={styles.safeArea}>
-          <StatusBar style="light" />
           <View style={styles.centerContainer}>
             <Text style={styles.title}>Nenhum vídeo encontrado</Text>
             <Text style={styles.subtitle}>
@@ -110,11 +106,10 @@ export default function ChavesHome() {
 
   return (
     <LinearGradient
-      colors={[colors.neutral[900], colors.neutral[800]]}
+      colors={[colors.neutral[0], colors.neutral[100]]}
       style={styles.container}
     >
       <SafeAreaView style={styles.safeArea}>
-        <StatusBar style="light" />
         <View style={styles.header}>
           <Text style={styles.headerTitle}>Meus Vídeos</Text>
           <View style={styles.headerSubtitleContainer}>
@@ -123,7 +118,10 @@ export default function ChavesHome() {
             </Text>
             {isRefreshing && (
               <View style={styles.refreshIndicator}>
-                <ActivityIndicator size="small" color={colors.miami.cyan} />
+                <ActivityIndicator
+                  size="small"
+                  color={colors.primary.DEFAULT}
+                />
                 <Text style={styles.refreshText}>Atualizando...</Text>
               </View>
             )}
@@ -140,10 +138,10 @@ export default function ChavesHome() {
             <RefreshControl
               refreshing={isRefreshing}
               onRefresh={onRefresh}
-              colors={[colors.miami.cyan]}
-              tintColor={colors.miami.cyan}
+              colors={[colors.primary.DEFAULT]}
+              tintColor={colors.primary.DEFAULT}
               title="Atualizando vídeos..."
-              titleColor={colors.miami.gray}
+              titleColor={colors.neutral.DEFAULT}
             />
           }
         />
@@ -169,10 +167,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingTop: 16,
     paddingBottom: 20,
-    backgroundColor: colors.neutral[800],
+    backgroundColor: colors.neutral[100],
     borderBottomWidth: 2,
-    borderBottomColor: colors.miami.cyan,
-    shadowColor: colors.miami.pink,
+    borderBottomColor: colors.primary.DEFAULT,
+    shadowColor: colors.secondary.DEFAULT,
     shadowOffset: {
       width: 0,
       height: 4,
@@ -184,15 +182,15 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: colors.miami.white,
+    color: colors.primary.DEFAULT,
     marginBottom: 4,
-    textShadowColor: colors.miami.pink,
+    textShadowColor: colors.secondary.DEFAULT,
     textShadowOffset: { width: 0, height: 2 },
     textShadowRadius: 4,
   },
   headerSubtitle: {
     fontSize: 16,
-    color: colors.miami.gray,
+    color: colors.neutral.DEFAULT,
     fontWeight: '400',
   },
   headerSubtitleContainer: {
@@ -207,7 +205,7 @@ const styles = StyleSheet.create({
   },
   refreshText: {
     fontSize: 14,
-    color: colors.miami.cyan,
+    color: colors.primary.DEFAULT,
     marginLeft: 6,
     fontWeight: '500',
   },
@@ -216,22 +214,22 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 10,
     textAlign: 'center',
-    color: colors.miami.white,
+    color: colors.primary.DEFAULT,
   },
   subtitle: {
     fontSize: 16,
-    color: colors.miami.gray,
+    color: colors.neutral.DEFAULT,
     textAlign: 'center',
     marginBottom: 10,
   },
   loadingText: {
     marginTop: 16,
     fontSize: 16,
-    color: colors.miami.gray,
+    color: colors.neutral.DEFAULT,
   },
   errorText: {
     fontSize: 18,
-    color: colors.miami.pink,
+    color: colors.secondary.DEFAULT,
     fontWeight: 'bold',
     marginBottom: 10,
     textAlign: 'center',

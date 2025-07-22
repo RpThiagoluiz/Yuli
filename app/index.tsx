@@ -1,10 +1,11 @@
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useRef, useState } from 'react';
 import { Animated, StyleSheet, Text, View } from 'react-native';
 import { colors } from '../styles/colors';
+
+const TIME_TO_NAVIGATE = 3000; // 3 seconds
 
 export default function WelcomeScreen() {
   const [showWelcome] = useState(true);
@@ -27,7 +28,7 @@ export default function WelcomeScreen() {
       ]).start(() => {
         router.replace('/(dashboard)/home');
       });
-    }, 3000);
+    }, TIME_TO_NAVIGATE);
 
     return () => clearTimeout(timer);
   }, [scaleAnim, opacityAnim]);
@@ -38,11 +39,10 @@ export default function WelcomeScreen() {
 
   return (
     <LinearGradient
-      colors={[colors.neutral[900], colors.neutral[800], colors.neutral[900]]}
+      colors={[colors.neutral[0], colors.neutral[100], colors.neutral[0]]}
       locations={[0, 0.5, 1]}
       style={styles.container}
     >
-      <StatusBar style="light" />
       {showWelcome && (
         <View style={styles.content}>
           <Animated.View
@@ -54,15 +54,15 @@ export default function WelcomeScreen() {
               },
             ]}
           >
-            <Ionicons name="play-circle" size={120} color={colors.miami.cyan} />
+            <Ionicons
+              name="play-circle"
+              size={200}
+              color={colors.primary.DEFAULT}
+            />
+            <View style={styles.textContainer}>
+              <Text style={styles.welcomeTitle}>Yuli</Text>
+            </View>
           </Animated.View>
-
-          <View style={styles.textContainer}>
-            <Text style={styles.welcomeTitle}>Bem-vindo ao Play</Text>
-            <Text style={styles.welcomeSubtitle}>
-              Seus vídeos favoritos em um só lugar
-            </Text>
-          </View>
         </View>
       )}
     </LinearGradient>
@@ -72,7 +72,7 @@ export default function WelcomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.neutral[900],
+    backgroundColor: colors.neutral[0],
   },
   content: {
     flex: 1,
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
   },
   iconContainer: {
     marginBottom: 40,
-    shadowColor: colors.miami.pink,
+    shadowColor: colors.secondary.DEFAULT,
     shadowOffset: {
       width: 0,
       height: 8,
@@ -97,20 +97,8 @@ const styles = StyleSheet.create({
   welcomeTitle: {
     fontSize: 32,
     fontWeight: 'bold',
-    color: colors.miami.white,
+    color: colors.primary.DEFAULT,
     textAlign: 'center',
     marginBottom: 8,
-    textShadowColor: colors.miami.pink,
-    textShadowOffset: { width: 0, height: 2 },
-    textShadowRadius: 8,
-  },
-  welcomeSubtitle: {
-    fontSize: 18,
-    color: colors.miami.gray,
-    textAlign: 'center',
-    fontWeight: '400',
-    textShadowColor: colors.miami.cyan,
-    textShadowOffset: { width: 0, height: 1 },
-    textShadowRadius: 4,
   },
 });

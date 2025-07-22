@@ -11,8 +11,6 @@ import {
 } from 'react-native';
 
 export default function VideoPlayer({ uri }: { uri: string }) {
-  console.log('🎥 Video URI:', uri);
-
   const [isLoading, setIsLoading] = useState(true);
   const [currentUrlIndex, setCurrentUrlIndex] = useState(0);
   const [hasError, setHasError] = useState(false);
@@ -93,26 +91,19 @@ export default function VideoPlayer({ uri }: { uri: string }) {
 
   useEffect(() => {
     const statusSubscription = player.addListener('statusChange', (status) => {
-      console.log('🎮 Player status:', status);
-
       switch (status.status) {
         case 'idle':
-          console.log('⏸️ Player idle');
           break;
         case 'loading':
-          console.log('🔄 Vídeo carregando...');
           setIsLoading(true);
           setHasError(false);
           break;
         case 'readyToPlay':
-          console.log('✅ Vídeo pronto para reproduzir');
           setIsLoading(false);
           setHasError(false);
           break;
         case 'error':
-          console.error('❌ Erro no player:', status.error);
           if (fileId && currentUrlIndex < 4) {
-            console.log('🔄 Tentando próxima URL devido a erro...');
             setCurrentUrlIndex((prev) => prev + 1);
             setIsLoading(true);
           } else {

@@ -1,16 +1,16 @@
 export const colors = {
-  // Miami Vice Theme Colors
+  // Cores principais da aplicação
   primary: {
-    900: '#0bd3d3', // Cyan principal
-    500: '#0bd3d3',
-    100: '#e6fefe', // Cyan muito claro
-    DEFAULT: '#0bd3d3',
+    900: '#2c7fb8', // Versão mais escura do azul
+    500: '#41b6e6', // Azul principal para títulos e destaques
+    100: '#e6f6fd', // Azul muito claro
+    DEFAULT: '#41b6e6',
   },
   secondary: {
-    900: '#f890e7', // Pink/Magenta principal
-    500: '#f890e7',
-    100: '#fef0fc', // Pink muito claro
-    DEFAULT: '#f890e7',
+    900: '#b82e8a', // Versão mais escura do rosa
+    500: '#db3eb1', // Rosa principal para títulos e destaques
+    100: '#fce9f5', // Rosa muito claro
+    DEFAULT: '#db3eb1',
   },
   tertiary: {
     900: '#ffffff', // Branco
@@ -19,30 +19,17 @@ export const colors = {
     DEFAULT: '#ffffff',
   },
   neutral: {
-    900: '#000000', // Preto
+    900: '#000000', // Preto para textos
     800: '#1a1a1a',
     700: '#333333',
     600: '#4d4d4d',
     500: '#666666',
     400: '#808080',
     300: '#999999',
-    200: '#d0d0d0', // Cinza médio
+    200: '#d0d0d0',
     100: '#f5f5f5',
-    0: '#ffffff', // Branco
-    DEFAULT: '#d0d0d0',
-  },
-  // Cores temáticas Miami Vice
-  miami: {
-    cyan: '#0bd3d3', // rgb(11,211,211)
-    pink: '#f890e7', // rgb(248,144,231)
-    white: '#ffffff', // rgb(255,255,255)
-    gray: '#d0d0d0', // rgb(208,208,208)
-    black: '#000000', // rgb(0,0,0)
-    // Variações para gradientes e efeitos
-    cyanLight: '#7ee8e8',
-    cyanDark: '#089a9a',
-    pinkLight: '#fbb8f1',
-    pinkDark: '#e668d6',
+    0: '#ffffff', // Fundo base da aplicação
+    DEFAULT: '#000000', // Texto padrão
   },
   // Cores funcionais mantidas
   danger: {
@@ -69,11 +56,11 @@ export const colors = {
     100: '#dbeafe',
     DEFAULT: '#2563eb',
   },
-  // Gradientes Miami Vice
+  // Gradientes atualizados
   gradient: {
-    miami: 'linear-gradient(135deg, #0bd3d3, #f890e7)',
-    miamiHorizontal: 'linear-gradient(90deg, #0bd3d3, #f890e7)',
-    miamiVertical: 'linear-gradient(180deg, #0bd3d3, #f890e7)',
-    miamiRadial: 'radial-gradient(circle, #0bd3d3, #f890e7)',
+    primarySecondary: 'linear-gradient(135deg, #41b6e6, #db3eb1)',
+    horizontal: 'linear-gradient(90deg, #41b6e6, #db3eb1)',
+    vertical: 'linear-gradient(180deg, #41b6e6, #db3eb1)',
+    radial: 'radial-gradient(circle, #41b6e6, #db3eb1)',
   },
 };

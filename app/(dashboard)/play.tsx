@@ -1,7 +1,7 @@
 import { colors } from '@/styles/colors';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
+
 import React from 'react';
 import {
   SafeAreaView,
@@ -19,8 +19,6 @@ export default function PlayScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar style="light" />
-
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <View style={styles.header}>
           <Text style={styles.title}>Suas Coleções</Text>
@@ -34,7 +32,7 @@ export default function PlayScreen() {
             activeOpacity={0.7}
           >
             <View style={styles.cardIcon}>
-              <Ionicons name="tv" size={40} color={colors.miami.cyan} />
+              <Ionicons name="tv" size={40} color={colors.primary.DEFAULT} />
             </View>
 
             <View style={styles.cardContent}>
@@ -47,12 +45,16 @@ export default function PlayScreen() {
                   <Ionicons
                     name="videocam"
                     size={16}
-                    color={colors.miami.pink}
+                    color={colors.secondary.DEFAULT}
                   />
                   <Text style={styles.statText}>300+ episódios</Text>
                 </View>
                 <View style={styles.statItem}>
-                  <Ionicons name="time" size={16} color={colors.miami.pink} />
+                  <Ionicons
+                    name="time"
+                    size={16}
+                    color={colors.secondary.DEFAULT}
+                  />
                   <Text style={styles.statText}>Clássico</Text>
                 </View>
               </View>
@@ -62,7 +64,7 @@ export default function PlayScreen() {
               <Ionicons
                 name="chevron-forward"
                 size={24}
-                color={colors.miami.pink}
+                color={colors.secondary.DEFAULT}
               />
             </View>
           </TouchableOpacity>
@@ -73,16 +75,21 @@ export default function PlayScreen() {
               <Ionicons
                 name="add-circle-outline"
                 size={40}
-                color={colors.miami.gray}
+                color={colors.neutral.DEFAULT}
               />
             </View>
 
             <View style={styles.cardContent}>
-              <Text style={[styles.cardTitle, { color: colors.miami.gray }]}>
+              <Text
+                style={[styles.cardTitle, { color: colors.neutral.DEFAULT }]}
+              >
                 Mais coleções em breve
               </Text>
               <Text
-                style={[styles.cardDescription, { color: colors.miami.gray }]}
+                style={[
+                  styles.cardDescription,
+                  { color: colors.neutral.DEFAULT },
+                ]}
               >
                 Novas coleções de vídeos serão adicionadas em futuras
                 atualizações
@@ -106,7 +113,7 @@ export default function PlayScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.neutral[900],
+    backgroundColor: colors.neutral[0],
   },
   scrollContent: {
     padding: 20,
@@ -119,16 +126,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: colors.miami.white,
+    color: colors.primary.DEFAULT,
     textAlign: 'center',
     marginBottom: 8,
-    textShadowColor: colors.miami.pink,
-    textShadowOffset: { width: 0, height: 2 },
-    textShadowRadius: 4,
   },
   subtitle: {
     fontSize: 16,
-    color: colors.miami.gray,
+    color: colors.neutral.DEFAULT,
     textAlign: 'center',
   },
   collectionsContainer: {
@@ -137,13 +141,13 @@ const styles = StyleSheet.create({
   collectionCard: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: colors.neutral[800],
+    backgroundColor: colors.neutral[100],
     borderRadius: 16,
     padding: 20,
     marginBottom: 16,
     borderWidth: 2,
-    borderColor: colors.miami.cyan,
-    shadowColor: colors.miami.pink,
+    borderColor: colors.primary.DEFAULT,
+    shadowColor: colors.secondary.DEFAULT,
     shadowOffset: {
       width: 0,
       height: 4,
@@ -153,19 +157,19 @@ const styles = StyleSheet.create({
     elevation: 8,
   },
   comingSoonCard: {
-    borderColor: colors.miami.gray,
+    borderColor: colors.neutral.DEFAULT,
     opacity: 0.6,
   },
   cardIcon: {
     width: 70,
     height: 70,
     borderRadius: 35,
-    backgroundColor: colors.neutral[700],
+    backgroundColor: colors.neutral[0],
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 16,
     borderWidth: 1,
-    borderColor: colors.miami.cyan,
+    borderColor: colors.primary.DEFAULT,
   },
   cardContent: {
     flex: 1,
@@ -173,12 +177,12 @@ const styles = StyleSheet.create({
   cardTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: colors.miami.white,
+    color: colors.neutral.DEFAULT,
     marginBottom: 6,
   },
   cardDescription: {
     fontSize: 14,
-    color: colors.miami.gray,
+    color: colors.neutral.DEFAULT,
     lineHeight: 20,
     marginBottom: 12,
   },
@@ -192,7 +196,7 @@ const styles = StyleSheet.create({
   },
   statText: {
     fontSize: 12,
-    color: colors.miami.gray,
+    color: colors.neutral.DEFAULT,
     marginLeft: 4,
     fontWeight: '500',
   },
@@ -200,21 +204,21 @@ const styles = StyleSheet.create({
     marginLeft: 12,
   },
   infoContainer: {
-    backgroundColor: colors.neutral[800],
+    backgroundColor: colors.neutral[100],
     padding: 16,
     borderRadius: 12,
     borderLeftWidth: 4,
-    borderLeftColor: colors.miami.cyan,
+    borderLeftColor: colors.primary.DEFAULT,
   },
   infoTitle: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: colors.miami.white,
+    color: colors.primary.DEFAULT,
     marginBottom: 8,
   },
   infoText: {
     fontSize: 14,
-    color: colors.miami.gray,
+    color: colors.neutral.DEFAULT,
     lineHeight: 20,
   },
 });

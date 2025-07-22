@@ -3,7 +3,6 @@ import { colors } from '@/styles/colors';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router, useLocalSearchParams } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import {
   SafeAreaView,
@@ -21,19 +20,21 @@ export default function VideoDetailsScreen() {
 
   return (
     <LinearGradient
-      colors={[colors.neutral[900], colors.neutral[800]]}
+      colors={[colors.neutral[0], colors.neutral[100]]}
       style={styles.container}
     >
       <SafeAreaView style={styles.safeArea}>
-        <StatusBar style="light" />
-
         {/* Header com botão de voltar */}
         <View style={styles.header}>
           <TouchableOpacity
             style={styles.backButton}
             onPress={() => router.back()}
           >
-            <Ionicons name="arrow-back" size={24} color={colors.miami.cyan} />
+            <Ionicons
+              name="arrow-back"
+              size={24}
+              color={colors.primary.DEFAULT}
+            />
           </TouchableOpacity>
           <Text style={styles.headerTitle} numberOfLines={1}>
             {name || 'Detalhes do Vídeo'}
@@ -65,10 +66,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 16,
     paddingVertical: 12,
-    backgroundColor: colors.neutral[800],
+    backgroundColor: colors.neutral[100],
     borderBottomWidth: 2,
-    borderBottomColor: colors.miami.cyan,
-    shadowColor: colors.miami.pink,
+    borderBottomColor: colors.primary.DEFAULT,
+    shadowColor: colors.secondary.DEFAULT,
     shadowOffset: {
       width: 0,
       height: 4,
@@ -85,16 +86,16 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 18,
     fontWeight: '600',
-    color: colors.miami.white,
+    color: colors.primary.DEFAULT,
   },
   errorContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: colors.neutral[800],
+    backgroundColor: colors.neutral[100],
   },
   errorText: {
-    color: colors.miami.gray,
+    color: colors.neutral.DEFAULT,
     fontSize: 16,
   },
 });
